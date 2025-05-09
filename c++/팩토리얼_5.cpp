@@ -2,21 +2,7 @@
 using namespace std;
 #define FASTIO ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 typedef long long ll;
-typedef pair<int, int> pi;
-typedef pair<ll, ll> pl;
-typedef vector<int> vi;
-typedef vector<ll> vll;
-typedef vector<vector<int>> vvi;
-typedef vector<vector<ll>> vvll;
-typedef vector<pair<int, int>> vpi;
-typedef vector<pair<ll, ll>> vpll;
-typedef struct Point {int x, y;} point;
-point direction[4] = {{1,0},{0,1},{-1,0},{0,-1}};
-#define X first
-#define Y second
-void print(vvi mat){for(auto i : mat){for(auto j : i) cout << j << ' ';cout << '\n';}}
-void print(vi vec){for(auto i : vec) cout << i << ' ';}
-#define modulo 1000000000
+#define modulo 1000000000000
 
 int main(){
     FASTIO
@@ -24,19 +10,12 @@ int main(){
     int n; cin >> n;
     ll res = 1;
     for(ll i = 1 ; i <= n ; i++){
-        ll t = i;
-        ll c=0;
-        while(t/5 && t % 5 == 0) {
-            t /= 5;
-            c++;
-        }
-        res *= t;
-        res %= c*2;
-
+        res *= i;
+        while(!(res % 10)) res /= 10;
         res %= modulo;
-        cout << res << '\n';
     }
 
+    res %= 100000;
     cout << setw(5) << setfill('0') << res;
     
 }
