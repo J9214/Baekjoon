@@ -9,7 +9,7 @@ int main(){
 
     int n; cin >> n;
     ll res = 1;
-    for(ll i = 1 ; i <= n ; i++){
+    for(ll i = 1; i <= n ; i++){
         res *= i;
         while(!(res % 10)) res /= 10;
         res %= modulo;

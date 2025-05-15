@@ -21,13 +21,17 @@ void print(vi vec){for(auto i : vec) cout << i << ' ';}
 int main(){
     FASTIO
 
-    int t; cin >> t;
-    while(t--){
-        int a,b,c; cin >> a >> b >> c;
-
-        if(a==1) cout << max(0,c-b);
-        else if(a==2) cout << max(0, c + (c-b)*3 );
-        else if(a==3) cout << max(0, c + c*3 + c*5 -b);
-        cout << '\n';
+    ll n,l=0,res=0; cin >> n;
+    priority_queue<ll, vector<ll>, greater<ll>> pq;
+    for(ll i = 0 ; i < n; i++){
+        ll x; cin >> x;
+        pq.push(x);
+        l+=x;
     }
+    while(pq.size() > 1){
+        res += pq.top() * (l - pq.top());
+        l -= pq.top(); 
+        pq.pop();
+    }
+    cout << res;
 }

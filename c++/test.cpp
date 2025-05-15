@@ -1,42 +1,29 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define FASTIO ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-typedef long long ll;
-typedef pair<int, int> pi;
-typedef pair<ll, ll> pl;
 typedef vector<int> vi;
-typedef vector<ll> vll;
 typedef vector<vector<int>> vvi;
-typedef vector<vector<ll>> vvll;
-typedef vector<pair<int, int>> vpi;
-typedef vector<pair<ll, ll>> vpll;
-typedef struct Point {int x, y;} point;
-point direction[4] = {{1,0},{0,1},{-1,0},{0,-1}};
-#define X first
-#define Y second
-void print(vvi mat){for(auto i : mat){for(auto j : i) cout << j << ' ';cout << '\n';}}
 void print(vi vec){for(auto i : vec) cout << i << ' ';}
-#define modulo 1000000000
 
+int n;
+vi vec(100001,0);
+void insert(){
+    while(cin >> n){
+        int idx = 1;
+        while(vec[idx] != 0){
+            if (vec[idx] > n) idx <<= 1;
+            else idx  = (idx << 1) + 1;
+        }
+        vec[idx] = n;
+    }
+}
+void dfs(int node){
+    if(vec[(node<<1)]!=0) dfs(vec[(node<<1)]);
+    if(vec[(node<<1) + 1]!=0) dfs(vec[(node<<1) + 1]);
+    cout << node << '\n';
+}
 int main(){
     FASTIO
-
-    int n; cin >> n;
-    ll res = 1;
-    for(ll i = 1 ; i <= n ; i++){
-        ll t = i;
-        ll c=0;
-        while(t/5 && t % 5 == 0) {
-            t /= 5;
-            c++;
-        }
-        res *= t;
-        res %= c*2;
-
-        res %= modulo;
-        cout << res << '\n';
-    }
-
-    cout << setw(5) << setfill('0') << res;
-    
+    insert();
+    dfs(1);
 }

@@ -1,85 +1,30 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define FASTIO ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+typedef vector<int> vi;
+typedef vector<vector<int>> vvi;
+void print(vi vec){for(auto i : vec) cout << i << ' ';}
 
-struct Node{
-    int data;
-    Node* left;
-    Node* right;
-
-    Node(int val) : data(val), left(nullptr), right(nullptr){}
-};
-
-class B_Tree{
-private:
-    Node* root;
-
-    Node* insertNode(Node* node, int data){
-        if(node == nullptr){
-            return new Node(data);
-        }
-
-        if(data < node->data) node->left = insertNode(node->left, data);
-        else node->right = insertNode(node->right, data);
-
-        return node;
-    }
-
-    void inorderTraversal(Node* node){
-        if(node == nullptr) return;
-
-        inorderTraversal(node->left);
-        cout << node->data << '\n';
-        inorderTraversal(node->right);
-    }
-
-    void preTraversal(Node* node){
-        if(node == nullptr) return;
-
-        cout << node->data << '\n';
-        preTraversal(node->left);
-        preTraversal(node->right);
-    }
-    
-    void postTraversal(Node* node){
-        if(node == nullptr) return;
-
-        postTraversal(node->left);
-        postTraversal(node->right);
-        cout << node->data << '\n';
-    }
-public:
-    B_Tree() : root(nullptr){}
-
-    void insert(int data){
-        root = insertNode(root, data);
-    }
-
-    void inorder(){
-        inorderTraversal(root);
-    }
-
-    void preorder(){
-        preTraversal(root);
-    }
-
-    void postorder(){
-        postTraversal(root);
-    }
-};
-
-
-int main() {
-    FASTIO
-
-    B_Tree tree;
-
-    int n;
+int n;
+vi vec(200001,0);
+void insert(){
     while(cin >> n){
-        tree.insert(n);
+        int idx = 1;
+        while(vec[idx] != 0){
+            if (vec[idx] > n) idx <<= 1;
+            else idx  = (idx << 1) + 1;
+        }
+        vec[idx] = n;
     }
-    
-    tree.postorder();
-
-    return 0;
+}
+void dfs(int node){
+    if((node<<1)>100000) return;
+    if(vec[(node<<1)]!=0) dfs((node<<1));
+    if(vec[(node<<1) + 1]!=0) dfs((node<<1) + 1);
+    cout << vec[node] << '\n';
+}
+int main(){
+    FASTIO
+    insert();
+    dfs(1);
 }
