@@ -18,19 +18,33 @@ void print(vvi mat){for(auto i : mat){for(auto j : i) cout << j << ' ';cout << '
 void print(vi vec){for(auto i : vec) cout << i << ' ';}
 #define modulo 1000000007
 
+vector<vector<pi>> tree;
+int res=0;
+void insert(){
+    int n; cin >> n;
+    tree.resize(n+1);
+    int a,b,c;
+    while(cin >> a >> b >> c){
+        tree[a].push_back({b,c});
+    }
+}
+int dfs(int node, int weight){
+    int l=0, r=0;
+    for(auto i : tree[node]){
+        int a = dfs(i.first, i.second);
+        if(a > l){
+            r = l;
+            l = a;
+        }
+        else if(a > r) r = a;
+    }
+    res = max(res, l+r);
+    return max(l,r)+weight;
+
+}
 int main(){
     FASTIO
-
-    int n,q; cin >> n >> q;
-    vi tree(n+1,0);
-    for(int i = 0 ; i < q; i++) {
-        int t, res = 0; cin >> t;
-        int t2 = t;
-        while(t){
-            if(tree[t] != 0) res = t;
-            t/=2;
-        }
-        cout << res << '\n';
-        tree[t2]++;
-    }
+    insert();
+    dfs(1,0);
+    cout << res;
 }

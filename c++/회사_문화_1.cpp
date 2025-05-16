@@ -18,19 +18,32 @@ void print(vvi mat){for(auto i : mat){for(auto j : i) cout << j << ' ';cout << '
 void print(vi vec){for(auto i : vec) cout << i << ' ';}
 #define modulo 1000000007
 
+vvi under(100001);
+vi praise(100001,0);
+vi visited(100001,0);
+
+void dfs(int node){
+    if(visited[node]) return;
+    visited[node]=1;
+    for(auto idx : under[node]){        
+        praise[idx] += praise[node];
+        dfs(idx);
+    }
+}
 int main(){
     FASTIO
 
+    
     int n,q; cin >> n >> q;
-    vi tree(n+1,0);
-    for(int i = 0 ; i < q; i++) {
-        int t, res = 0; cin >> t;
-        int t2 = t;
-        while(t){
-            if(tree[t] != 0) res = t;
-            t/=2;
-        }
-        cout << res << '\n';
-        tree[t2]++;
+
+    for(int i = 1 ; i <= n; i++) {
+        int under_num; cin >> under_num;
+        if(under_num>0) under[under_num].push_back(i);
     }
+    for(int i = 1 ; i <= q; i++){
+        int my_num, praise_amount; cin >> my_num >> praise_amount;
+        praise[my_num]+=praise_amount;
+    }
+    dfs(1);
+    for(int i = 1 ; i <= n; i++) cout << praise[i] << ' ' ;
 }
