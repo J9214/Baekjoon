@@ -18,28 +18,43 @@ void print(vvi mat){for(auto i : mat){for(auto j : i) cout << j << ' ';cout << '
 void print(vi vec){for(auto i : vec) cout << i << ' ';}
 #define modulo 1000000007
 
-vi parent(16,0);
-vi depth(16,0);
+int parent[50001];
+int depth[50001];
+vvi tree(50001);
+void make_tree(int p, int c){
+    // int p, c; cin >> p >> c;
+    // if(depth[p] == 0) swap(p,c);
+    parent[c] = p;
+    depth[c] = depth[p]+1;
+    for(auto i : tree[c]){
+        if(i != p) make_tree(c,i);
+    }
+}
 int main(){
     FASTIO
 
     int n; cin >> n;
     n--;
-    while(n--){
-        int p, c; cin >> p >> c;
-        if(depth[p] == 0) swap(p,c);
-        parent[c] = p;
-        depth[c] = depth[p]+1;
+    depth[1] = 1;
+    for(int i = 0 ; i < n ; i++){
+        int a,b;cin >> a >> b;
+        tree[a].push_back(b);
+        tree[b].push_back(a);
     }
+    // while(n--){
+    //     int p, c; cin >> p >> c;
+    //     if(depth[p] == 0) swap(p,c);
+    //     parent[c] = p;
+    //     depth[c] = depth[p]+1;
+    // }
+    make_tree(0,1);
     int m; cin >> m;
     while(m--){
         int a,b; cin >> a >> b;
-        while(parent[a] != parent[b]){
-            if(depth[a] > depth[b]) a = parent[a];
-            else b = parent[b];
-            cout << a << ' ' << b << '\n';
-        }
+        if(depth[a] > depth[b]) swap(a,b);
+        while(depth[a]!=depth[b])  b = parent[b];
+        while(a != b)a = parent[a], b = parent[b];  
         
-        cout << parent[a] << '\n';
+        cout << a << '\n';
     }
-}
+}   
