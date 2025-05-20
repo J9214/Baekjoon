@@ -22,8 +22,6 @@ int parent[50001];
 int depth[50001];
 vvi tree(50001);
 void make_tree(int p, int c){
-    // int p, c; cin >> p >> c;
-    // if(depth[p] == 0) swap(p,c);
     parent[c] = p;
     depth[c] = depth[p]+1;
     for(auto i : tree[c]){
@@ -41,12 +39,6 @@ int main(){
         tree[a].push_back(b);
         tree[b].push_back(a);
     }
-    // while(n--){
-    //     int p, c; cin >> p >> c;
-    //     if(depth[p] == 0) swap(p,c);
-    //     parent[c] = p;
-    //     depth[c] = depth[p]+1;
-    // }
     make_tree(0,1);
     int m; cin >> m;
     while(m--){
