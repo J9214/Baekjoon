@@ -25,21 +25,21 @@ int main(){
     }
     plums.push_back(c);
 
-    print(plums);
-    cout << "\n \n";
     int n = plums.size(), res = plums[0];
     
     vvi dp(w+1,vi(n,0));
-    dp[0] = plums;
+    dp[0][0] = plums[0];
 
     for(int i = 0 ; i <= w ; i++){
         for(int j = i ; j < n; j++){
             int a = 0, b = 0;
             if(j > 1) a = dp[i][j-2];
             if(i) b = dp[i-1][j-1];
+            else if(j%2) continue;
             dp[i][j] = max(a,b) + plums[j];
             res = max(res, dp[i][j]);
         }
     }
-    print(dp);
+    // print(dp);
+    cout << res;
 }

@@ -11,5 +11,4 @@ int main(){
     for(int i = 0 ; i< b.size(); i++) d += a;
     if(c==d) cout << 1;
     else cout << 0;
-    
 }
