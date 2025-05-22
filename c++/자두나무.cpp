@@ -40,6 +40,5 @@ int main(){
             res = max(res, dp[i][j]);
         }
     }
-    // print(dp);
     cout << res;
 }
