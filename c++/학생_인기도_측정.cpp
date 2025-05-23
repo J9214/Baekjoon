@@ -21,17 +21,15 @@ void print(vi vec){for(auto i : vec) cout << i << ' ';}
 int main(){
     FASTIO
 
+    map<string,int> mp;
     int n; cin >> n;
-    
-    vi vec(n+1,0);
-    for(int i = 1 ; i<= n ; i++) cin >> vec[i];
-    vvi dp(n+1,vi(n+1,0));
-    
-    for(int i = 1 ; i <= n ; i++){
-        for(int j = 0 ; j <= n ; j++){
-            if(i&&!j) dp[i][j] = 1;
-            else dp[i][j] =  max(dp[i][j-1], dp[i-1][j-1] + (vec[i] > vec[j] ? 1 : 0));
-        }
-    }
-    print(dp);
+    string s;
+    while(cin >> s) mp[s]++;
+    vector<pair<string,int>> vec;
+    for(auto &i:mp) vec.push_back({i.X,i.Y});
+    sort(vec.begin(),vec.end(),[](pair<string,int> &a, pair<string,int> &b){
+        if(a.Y==b.Y) return a.X < b.X;
+        return a.Y > b.Y;
+    });
+    for(auto &i:vec) cout << i.X << ' ' << i.Y-1 << '\n';    
 }

@@ -22,16 +22,9 @@ int main(){
     FASTIO
 
     int n; cin >> n;
-    
-    vi vec(n+1,0);
-    for(int i = 1 ; i<= n ; i++) cin >> vec[i];
-    vvi dp(n+1,vi(n+1,0));
-    
-    for(int i = 1 ; i <= n ; i++){
-        for(int j = 0 ; j <= n ; j++){
-            if(i&&!j) dp[i][j] = 1;
-            else dp[i][j] =  max(dp[i][j-1], dp[i-1][j-1] + (vec[i] > vec[j] ? 1 : 0));
-        }
-    }
-    print(dp);
+    if((n-1)%8 == 0) cout << 1;
+    if((n-1)%8 == 1 || (n-1)%8 == 7) cout << 2;
+    if((n-1)%8 == 2 || (n-1)%8 == 6) cout << 3;
+    if((n-1)%8 == 3 || (n-1)%8 == 5) cout << 4;
+    if((n-1)%8 == 4) cout << 5;
 }
