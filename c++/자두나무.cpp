@@ -16,14 +16,10 @@ int main(){
     
     for(int i = 0 ; i < t-1 ; i++){
         cin >> a;
-        if(prev != a){
-            plums.push_back(c);
-            c = 1;
-        }
-        else c++;
+        if(prev != a) plums.push_back(1);
+        else plums.back()++;
         prev = a;
     }
-    plums.push_back(c);
 
     int n = plums.size(), res = plums[0];
     
