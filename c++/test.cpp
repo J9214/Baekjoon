@@ -5,18 +5,8 @@ using namespace std;
 int main(){
     FASTIO
 
-    int a (0);
-    int b {2};
-    int c = 0;
-    int q,w (4);
-    int r,t {5};
-
-    cout << a << '\n';
-    cout << b << '\n';
-    cout << c << '\n';
-    cout << q << '\n';
-    cout << w << '\n';
-    cout << r << '\n';
-    cout << t << '\n';
-
+    int a = INT_MAX;
+    int b = a + 1;
+    cout  << a << '\n' << b;
+    cout << '\n' << a+a;
 }
