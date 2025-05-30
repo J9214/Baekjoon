@@ -59,8 +59,8 @@
                 if(b%vec[a-1]==0) g_m[b/vec[a-1]]++;
             }
 
-            if(a_m.size()==1 && a_m.begin()->first > 0) cout << "+";
-            else if(g_m.size()==1 && g_m.begin()->first >0) cout << "*";
+            if(a_m.size()==1 && a_m.begin()->first > 0 && a_m[a_m.begin()->first]==n-1) cout << "+";
+            else if(g_m.size()==1 && g_m.begin()->first >0 && g_m[g_m.begin()->first]==n-1) cout << "*";
             else cout << "?";
             cout << '\n';
 
