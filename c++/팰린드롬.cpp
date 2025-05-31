@@ -18,26 +18,32 @@ void print(vvi mat){for(auto i : mat){for(auto j : i) cout << j << ' ';cout << '
 void print(vi vec){for(auto i : vec) cout << i << ' ';}
 #define modulo 1000000007
 
+int palindrome(string s){
+    for(int i = 0 ; i<s.size()/2;i++)
+        if(s[i] != s[s.size()-1-i]) return 0;
+    return 1;
+}
+
+string func(int n, vector<string> &vec){
+    for(int i = 0 ; i < n ; i ++){
+        for(int j = 0; j < n ; j++){
+            if(i==j) continue;
+            if(palindrome(vec[i]+vec[j])) return vec[i]+vec[j];
+        }
+    }
+    return "";
+}
 int main(){
     FASTIO
 
-    int n; cin >> n;
-    vi nums(n+1);
-    vvi vec(n+1,vi(n+1,0));
-    for(int i = 1 ; i <= n; i++) cin >> nums[i];
-    for(int j = 0 ; j <= n ; j++){
-        for(int i = 0; i <= n; i++){
-            if(!i||!j||i>=j) vec[i][j] = 1;
-            else {
-                if(nums[i]!=nums[j]) vec[i][j] =0;
-                else vec[i][j] = vec[i+1][j-1];
-            }
-        }
-    }
-    
-    int m; cin >> m;
-    while(m--){
-        int a,b; cin >> a >> b;
-        cout << vec[a][b] << '\n';
+    int t; cin >> t;
+    while(t--){
+        int n;cin >> n;
+        vector<string> vec(n);
+        for(int i = 0 ; i < n ; i++) cin >> vec[i];
+        
+        string res = func(n,vec);
+        if(res=="") cout <<0 << '\n';
+        else cout << res << '\n';
     }
 }
