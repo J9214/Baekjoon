@@ -24,7 +24,7 @@ int main(){
     int n; cin >> n; 
     vi vec(n);
     vi fr, ba;
-
+    vvi res(2,vi(n));
     for(int i = 0 ; i < n ; i++)
         cin >> vec[i];
     
@@ -36,10 +36,13 @@ int main(){
 
         // ba
         auto ba_d = lower_bound(ba.begin(), ba.end(), vec[n-i-1]);
-        if(ba_d==ba.end())ba.push_back(vec[n-i-1]);
+        if(ba_d==ba.end()) ba.push_back(vec[n-i-1]);
         else *ba_d = vec[n-i-1];
 
-        cout << fr.size() << ' ' << ba.size() << '\n';
+        res[0][i] = fr.size();
+        res[1][n-i-1] = ba.size();
     }
-    
+    int m_=0;
+    for(int i = 0; i  < n ; i++) m_ = max(m_,res[0][i]+res[1][i]-1);
+    cout << m_;
 }
