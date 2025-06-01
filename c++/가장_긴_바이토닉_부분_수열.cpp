@@ -23,20 +23,23 @@ int main(){
 
     int n; cin >> n; 
     vi vec(n);
-    vi len(n);
+    vi fr, ba;
 
     for(int i = 0 ; i < n ; i++)
         cin >> vec[i];
     
-    print(vec);
-    for(int i = 0 ; i < n ; i++){
-        len[i] = 1;
-        for(int j = 0 ; j < i ;j ++){
-            if(vec[i] < vec[j] || vec[j] <vec[i])
-                len[i] = max(len[i], len[j]+1);
-        }
-        for(int j =)
+    for(int i = 0; i < n ; i++){
+        // fr
+        auto fr_d = lower_bound(fr.begin(), fr.end(), vec[i]);
+        if(fr_d==fr.end())fr.push_back(vec[i]);
+        else *fr_d = vec[i];
+
+        // ba
+        auto ba_d = lower_bound(ba.begin(), ba.end(), vec[n-i-1]);
+        if(ba_d==ba.end())ba.push_back(vec[n-i-1]);
+        else *ba_d = vec[n-i-1];
+
+        cout << fr.size() << ' ' << ba.size() << '\n';
     }
-    cout << '\n';
-    print(len);
+    
 }
